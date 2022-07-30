@@ -1,0 +1,49 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    width: 400px;
+    align-self: center;
+    justify-items: center;
+    justify-content: center;
+
+}
+
+.label {
+    font-size: 1rem;
+    padding: 1rem;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+}
+
+.selectlist {
+    font-size: 1rem;
+    padding: 1rem;
+    background-color: #6392f8;
+    color: #000;
+    font-weight: bold;
+    text-align: center;
+}
+
+.button {
+    max-width: 75%;
+    height: 100%;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    border: solid 2px blue;
+    margin-top: 20px;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+}
+
+.listtext {
+    font-size: 1rem;
+    padding: 1rem;
+    background-color: #6392f8;
+    color: #000;
+    font-weight: normal;
+    text-align: center;
+}

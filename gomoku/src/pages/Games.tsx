@@ -1,5 +1,5 @@
 export default function games() {
     return (
-        <div>games</div>
+        <div>Games</div>
     )
 }
