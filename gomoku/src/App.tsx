@@ -1,5 +1,7 @@
+import { Routes, Route } from 'react-router-dom'
+
 import Header from './components/Header'
-import { Home, Login } from './pages'
+import { Home, Login, Game, Gamelog, Games } from './pages'
 import style from './App.module.css'
 
 
@@ -8,12 +10,17 @@ function App() {
     <>
       <Header />
       <main className={style.main}>
-        <Login />
-        {/*<Home />*/}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Game" element={<Game />} />
+          <Route path="/Games" element={<Games />} />
+          <Route path="/Gamelog/:id" element={<Gamelog />} />
+          <Route path="*" element={<Home />} />
+        </Routes>
       </main>
     </>
   )
 }
-
 
 export default App;
