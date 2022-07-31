@@ -1,16 +1,19 @@
 import Header from './components/Header'
-import './App.css';
-import DropDown from './components/DropDown';
+import { Home, Login } from './pages'
+import style from './App.module.css'
+
 
 function App() {
   return (
     <>
       <Header />
-      <DropDown />
-      <main className="main"></main>
-
+      <main className={style.main}>
+        <Login />
+        {/*<Home />*/}
+      </main>
     </>
   )
 }
+
 
 export default App;

@@ -1,3 +1,4 @@
+import React from 'react'
 import style from './DropDown.module.css'
 
 //see https://www.newline.co/@andreeamaco/react-dropdown-tutorial-for-beginners-create-a-dropdown-menu-from-scratch--9831d197

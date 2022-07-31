@@ -1,6 +1,5 @@
-
-
 .main {
   flex: 1;
   padding: 1rem;
+  justify-content: center;
 }
