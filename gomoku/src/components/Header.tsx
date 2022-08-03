@@ -1,9 +1,21 @@
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import style from './Header.module.css'
 
 export default function Header() {
+    const navigate = useNavigate()
+    const location = useLocation()
+
     return (
         <header className={style.header}>
-            <div className={style.container}>Gomoku</div>
+            <div className={style.container}>
+                <Link to="/">Gomoku</Link>
+                {location.pathname === "/" &&
+                    <div className={style.actions}>
+                        <button className={style.action} onClick={() => navigate('login')}>Login</button>
+                        <button className={style.action} onClick={() => navigate('games')}>Previous Games</button>
+                    </div>
+                }
+            </div>
         </header>
     )
 }

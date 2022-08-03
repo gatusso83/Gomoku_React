@@ -1,6 +1,5 @@
-import Header from '../components/Header'
-import DropDown from '../components/DropDown'
-import { Button, Dropdown } from '../components'
+
+import { Dropdown } from '../components'
 import style from './Home.module.css'
 
 

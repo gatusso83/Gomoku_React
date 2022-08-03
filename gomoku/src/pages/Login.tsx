@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { UserContext } from '../context'
+import { useNavigate } from 'react-router-dom'
 
 import { Button, Input, Message } from '../components'
 import users from '../data/users.json'
@@ -7,6 +9,8 @@ import users from '../data/users.json'
 import style from './Login.module.css'
 
 export default function Login() {
+    const { login } = useContext(UserContext)
+    const navigate = useNavigate()
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
     const [isCredentialInvalid, setIsCredentialInvalid] = useState(false)
@@ -16,7 +20,8 @@ export default function Login() {
         if (!user) {
             setIsCredentialInvalid(true)
         } else {
-            console.log("logged in")
+            login(username)
+            navigate('Home')
         }
     }
 
