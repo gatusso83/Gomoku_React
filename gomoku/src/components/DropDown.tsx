@@ -20,7 +20,6 @@ export default function DropDown() {
                 <option value="14">14</option>
                 <option value="15">15</option>
             </select>
-            <button className={style.button}>Start Game</button>
         </div>
     )
 }
