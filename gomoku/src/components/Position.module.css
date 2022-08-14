@@ -1,0 +1,25 @@
+.position {
+    height: 2rem;
+    width: 2rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: 1rem;
+}
+
+.position.occupiedp1 {
+    background-color: black;
+    cursor: not-allowed;
+}
+
+.position.occupiedp2 {
+    background-color: white;
+    cursor: not-allowed;
+}
+
+.position.available:hover {
+    background-color: blue;
+    opacity: 0.5;
+    transform: scale(1.3);
+
+}

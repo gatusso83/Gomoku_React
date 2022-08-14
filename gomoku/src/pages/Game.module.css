@@ -1,0 +1,31 @@
+.container {
+    width: auto;
+    background-color: rgb(184, 163, 124);
+    max-width: 1000px;
+    flex-direction: column;
+    margin: 100px auto;
+    display: flex;
+}
+
+.positions {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.position-map {
+
+    margin-top: 25px;
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: .5rem;
+    display: flex;
+    background-color: rgb(241, 204, 134);
+}
+
+.row {
+    display: flex;
+    column-gap: .2rem;
+}
