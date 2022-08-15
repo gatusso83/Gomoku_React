@@ -7,23 +7,12 @@ type PositionProps = {
     id: number
     onSelect: () => void
     player: PLAYERTURN
-
     //   getPlayerTurn: () => void
 }
 
 export default function Position(props: PositionProps) {
     const { id, onSelect, player } = props
     const [status, setStatus] = useState(STATUS.AVAILABLE)
-
-
-    //const [playerTurn, setPlayerTurn] = useState(PLAYERTURN.PLAYER1)
-
-    // const currentPlayer = () => {
-    //     if (playerTurn === PLAYERTURN.PLAYER1)
-    //         return setPlayerTurn(PLAYERTURN.PLAYER2)
-    //     else
-    //         return setPlayerTurn(PLAYERTURN.PLAYER1)
-    // }
 
     const getClassNames = () => {
         const className = style.position
@@ -40,7 +29,7 @@ export default function Position(props: PositionProps) {
     }
 
     const handleClick = () => {
-        if (status === STATUS.AVAILABLE && player === PLAYERTURN.PLAYER1) { //{//playerTurn === PLAYERTURN.PLAYER1) {
+        if (status === STATUS.AVAILABLE && player === PLAYERTURN.PLAYER1) {
             console.log('select position', id)
             setStatus(STATUS.OCCUPIEDP1)
             onSelect()
@@ -54,8 +43,6 @@ export default function Position(props: PositionProps) {
             console.log("Which player is this: ", player)
             return player
         }
-
-
         if (status === STATUS.OCCUPIEDP1 || status === STATUS.OCCUPIEDP2)
             console.log('position selected already', id)
     }

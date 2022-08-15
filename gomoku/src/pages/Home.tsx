@@ -9,6 +9,7 @@ export default function Home() {
     const navigate = useNavigate()
     const { user } = useContext(UserContext)
 
+
     const getActions = () => {
         if (user) {
             return (
