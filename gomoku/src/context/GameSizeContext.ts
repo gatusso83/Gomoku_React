@@ -1,5 +1,4 @@
 import { createContext } from "react"
-import { Size } from '../types'
 
 type GameSizeContextType = {
     boardSize: number
