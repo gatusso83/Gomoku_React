@@ -1,3 +1,5 @@
+import { Gamelog } from '../pages'
+
 export { default as Header } from './Header'
 export { default as Button } from './Button'
 export { default as Input } from './Input'
@@ -6,3 +8,4 @@ export { default as Message } from './Message'
 export { default as UserProvider } from './UserProvider'
 export { default as Position } from './Position'
 export { default as GameSizeProvider } from './GameSizeProvider'
+export { default as GameLogic } from './GameLogic'
