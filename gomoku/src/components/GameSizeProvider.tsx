@@ -7,7 +7,7 @@ type GameSizeProps = {
 
 
 export default function GameSizeProvider({ children }: GameSizeProps) {
-    const [boardSize, setSize] = useState<number>(15)
+    const [boardSize, setSize] = useState<number>(5)
     const setBoardSize = (boardSize: number) => setSize(boardSize)
 
     return (

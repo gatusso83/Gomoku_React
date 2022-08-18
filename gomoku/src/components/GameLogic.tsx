@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { GameLogicContext } from '../context'
 import style from './GameLogic.module.css'
+import { Position } from '../components'
 
 type GameLogicProps = {
   p1Turn: boolean
@@ -92,6 +93,7 @@ export default function GameLogic(props: GameLogicProps) {
   }
 
   return (
+
     <div className={style.overlay}>
       <div onClick={handleClick}></div>
     </div>

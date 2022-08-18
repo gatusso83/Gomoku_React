@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { Navigate } from "react-router-dom"
+import { useNavigate, Navigate } from "react-router-dom"
 import { UserContext } from "../context"
 import { GameSizeContext } from '../context'
 import { Position, GameLogic, Button } from '../components'
@@ -7,6 +7,7 @@ import style from './Game.module.css'
 import { PLAYERTURN } from "../constants"
 
 export default function Game() {
+  const navigate = useNavigate()
   const { user } = useContext(UserContext)
   const [playerTurn, setPlayerTurn] = useState(PLAYERTURN.PLAYER1)
   const { boardSize } = useContext(GameSizeContext)
@@ -14,6 +15,9 @@ export default function Game() {
   const [p2List, setP2List] = useState([])
   const [p1Turn, setP1Turn] = useState(true)
   const [win] = useState(false)
+  const [checkWinDraw] = useState(false)
+
+
 
 
   const currentPlayer = () => {
@@ -41,28 +45,26 @@ export default function Game() {
     return win
   }
 
+  const handleLeave = () => {
+    console.log("Leave");
+    <Navigate to="/" />
+
+  }
+
   if (!user) return <Navigate to="/login" />
 
   return (
     <div>
-
-      <div className={style.container}><GameLogic p1Turn={p1Turn} rows={boardSize} columns={boardSize} p1List={p1List} p2List={p2List} onSelect={() => { winner() }} />
-        <GameLogic p1Turn={p1Turn} rows={boardSize} columns={boardSize} p1List={p1List} p2List={p2List} onSelect={() => { winner() }} />
-        <div>
-
-          <div className={style.positions} style={{ gridTemplateColumns: `repeat(${boardSize}, 1fr)` }}>
-            {[...Array(boardSize * boardSize)].map((_, index) => (
-              <Position key={`position-${index}`} id={index} onSelect={() => { currentPlayer() }} player={playerTurn} p1List={p1List} p2List={p2List} />
-
-
-            ))}
-          </div>
-
+      <div className={style.container}>
+        <div className={style.positions} style={{ gridTemplateColumns: `repeat(${boardSize}, 1fr)` }}>
+          {[...Array(boardSize * boardSize)].map((_, index) => (
+            <Position key={`position-${index}`} id={index} onSelect={() => { winner(); currentPlayer() }} player={playerTurn} p1List={p1List} p2List={p2List} />
+          ))}
         </div>
-
       </div>
-      <div>
+      <div className={style.btncontainer}>
         <Button onClick={() => window.location.reload()} >Reset</Button>
+        <Button onClick={() => navigate('/')}>Leave</Button>
       </div >
     </div >
   )

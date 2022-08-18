@@ -8,13 +8,13 @@ import { GameSizeContext } from '../context'
 
 
 export default function DropDown() {
-    const { setBoardSize } = useContext(GameSizeContext)
+    const { boardSize, setBoardSize } = useContext(GameSizeContext)
 
     return (
         <div className={style.container}>
             <label className={style.label}>Select Board Size</label>
-            <select className={style.selectlist} onChange={e => setBoardSize(parseInt(e.target.value))}>
-                <option value="15">Default size - 15</option>
+            <select className={style.selectlist} value={boardSize} onChange={e => setBoardSize(parseInt(e.target.value))}>
+
                 <option value="5">5</option>
                 <option value="6">6</option>
                 <option value="7">7</option>

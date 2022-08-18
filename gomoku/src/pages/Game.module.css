@@ -3,22 +3,14 @@
     background-color: rgb(184, 163, 124);
     max-width: 1000px;
     flex-direction: column;
-    margin: 100px auto;
-    display: flex;
-}
-
-.overlay {
-    width: auto;
-    background-color: rgb(184, 163, 124);
-    max-width: 1000px;
-    flex-direction: column;
-    margin: 100px auto;
+    margin: 100px auto 20px auto;
     display: flex;
 }
 
 .positions {
     display: grid;
     gap: 0.5rem;
+    column-gap: 0.5rem
 }
 
 .position-map {
@@ -37,4 +29,12 @@
 .row {
     display: flex;
     column-gap: .2rem;
+}
+
+.btncontainer {
+    display: flex;
+    justify-content: center;
+    column-gap: 3rem;
+    width: 100%;
+    max-width: 1500px;
 }
