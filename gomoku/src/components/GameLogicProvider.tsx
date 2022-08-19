@@ -6,13 +6,14 @@ type GameLogicProps = {
 }
 
 export default function GameLogicProvider({ children }: GameLogicProps) {
-    const [win, setWin] = useState<boolean>(false)
+    const [win, setWin] = useState(false)
     const setWinState = (win: boolean) => setWin(win)
-    const [draw, setDraw] = useState<boolean>(false)
+    const [draw, setDraw] = useState(false)
     const setDrawState = (draw: boolean) => setDraw(draw)
 
 
+
     return (
-        <GameLogicContext.Provider value={{ win, setWinState, draw, setDrawState }}>{children}</GameLogicContext.Provider>
+        <GameLogicContext.Provider value={{ win, setWinState, draw, setDrawState}}>{children}</GameLogicContext.Provider>
     )
 }

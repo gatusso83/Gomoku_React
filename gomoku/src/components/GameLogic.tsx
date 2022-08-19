@@ -1,24 +1,28 @@
 import React from 'react'
-import { useState } from 'react'
-import { GameLogicContext } from '../context'
+import { useState, useContext } from 'react'
+import { GameLogicContext, GameSizeContext } from '../context'
 import style from './GameLogic.module.css'
 import { Position } from '../components'
 
+
 type GameLogicProps = {
   p1Turn: boolean
-  rows: number
-  columns: number
   p1List: Array<number>
   p2List: Array<number>
-  children?: React.ReactNode
+  //   children?: React.ReactNode
   onSelect: () => void
 }
 
 export default function GameLogic(props: GameLogicProps) {
-  const { p1Turn, rows, columns, p1List, p2List, onSelect } = props
-
-  const [win, setWin] = useState(false)
-  const [draw, setDraw] = useState(false)
+  const { p1Turn, p1List, p2List, onSelect } = props
+  const { boardSize } = useContext(GameSizeContext)
+  const columns = boardSize
+  const rows = boardSize
+  //const [win, setWin] = useState(false)
+  const { win, setWinState } = useContext(GameLogicContext)
+  //const [draw, setDraw] = useState(false
+  //const [draw, setDraw] = useState(false)
+  const { draw, setDrawState } = useContext(GameLogicContext)
 
   const checkForFive = (list: number[]) => {
     let desDiagIncrement: number = columns + 1
@@ -34,7 +38,7 @@ export default function GameLogic(props: GameLogicProps) {
         ((element + 4 * desDiagIncrement) % columns !== 0) && ((element + 3 * desDiagIncrement) % columns !== 0) && +
         ((element + 2 * desDiagIncrement) % columns !== 0) && ((element + 1 * desDiagIncrement) % columns !== 0)) {
 
-        setWin(true)
+        setWinState(true)
       }
 
       //Ascending diagonal / code
@@ -42,13 +46,13 @@ export default function GameLogic(props: GameLogicProps) {
         list.includes(element - 3 * ascDiagIncrement) && list.includes(element - 4 * ascDiagIncrement) && +
         ((element - 4 * ascDiagIncrement) % columns !== 0) && ((element - 3 * ascDiagIncrement) % columns !== 0) && +
         ((element - 2 * ascDiagIncrement) % columns !== 0) && ((element - 1 * ascDiagIncrement) % columns !== 0)) {
-        setWin(true)
+        setWinState(true)
       }
 
       //Vertical | code
       if (list.includes(element + verticalIncrement) && list.includes(element + 2 * verticalIncrement) && +
         list.includes(element + 3 * verticalIncrement) && list.includes(element + 4 * verticalIncrement)) {
-        setWin(true)
+        setWinState(true)
       }
 
       //Horizontal - code
@@ -56,7 +60,7 @@ export default function GameLogic(props: GameLogicProps) {
         list.includes(element + 3 * horizontalIncrement) && list.includes(element + 4 * horizontalIncrement) && +
         ((element + 4 * horizontalIncrement) % columns !== 0) && ((element + 3 * horizontalIncrement) % columns !== 0) && +
         ((element + 2 * horizontalIncrement) % columns !== 0) && ((element + 1 * horizontalIncrement) % columns !== 0)) {
-        setWin(true)
+        setWinState(true)
       }
     })
 
@@ -80,7 +84,7 @@ export default function GameLogic(props: GameLogicProps) {
       checkForFive(p2List)
 
     if (win === false && ((p1List.length + p2List.length) === (rows * columns))) {
-      setDraw(true)
+      setDrawState(true)
       console.log("Game is a draw")
       //gameMessage.element.innerText = "Game is a draw, click reset game"
     }

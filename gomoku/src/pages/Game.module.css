@@ -10,7 +10,8 @@
 .positions {
     display: grid;
     gap: 0.5rem;
-    column-gap: 0.5rem
+    column-gap: 0.5rem;
+    background-color: rgb(241, 204, 134)
 }
 
 .position-map {
