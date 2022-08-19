@@ -2,10 +2,12 @@ import { useContext, useState } from "react"
 import { useNavigate, Navigate } from "react-router-dom"
 import { UserContext } from "../context"
 import { GameSizeContext } from '../context'
-import { Position, GameLogic, Button } from '../components'
+import { Position, Button } from '../components'
 import style from './Game.module.css'
 import { PLAYERTURN } from "../constants"
 import { Message } from '../components'
+import { useLocalStorage } from "../hooks"
+import { User } from '../types'
 
 export default function Game() {
   const navigate = useNavigate()
@@ -14,10 +16,12 @@ export default function Game() {
   const { boardSize } = useContext(GameSizeContext)
   const [p1List, setP1List] = useState([])
   const [p2List, setP2List] = useState([])
+  const [allPositionList, setAllPositionList] = useState([])
   const [p1Turn, setP1Turn] = useState(true)
   const [win, setWin] = useState(false)
   const [draw, setDraw] = useState(false)
-  //const [checkWinDraw] = useState(false)
+  const [currentUser, saveCurrentUser] = useLocalStorage<User | undefined>(`user-${user}`, user)
+  const [state, setState] = useState(currentUser)
   const columns = boardSize
   const rows = boardSize
 
@@ -25,24 +29,14 @@ export default function Game() {
     if (playerTurn === PLAYERTURN.PLAYER1) {
       console.log("testing states", p1Turn)
       console.log("Player 1 moves", p1List)
-      //checkWinDraw()
+      console.log("All position list", allPositionList)
       setPlayerTurn(PLAYERTURN.PLAYER2)
-      //setP1Turn(false)
-
-      //console.log("testing states", p1Turn)
-      console.log("BoardSize:", boardSize)
-      winner()
-      //return playerTurn
     }
     else {
       setPlayerTurn(PLAYERTURN.PLAYER1)
-      //checkWinDraw()
-      //setP1Turn(true)
       console.log("Player 2 moves:", p2List)
       console.log("testing states", p1Turn)
-      winner()
-      //return playerTurn
-
+      console.log("All position list", allPositionList)
     }
   }
 
@@ -53,13 +47,11 @@ export default function Game() {
     let horizontalIncrement: number = 1
 
     list.forEach(element => {
-      //console.log("checking list moves:", list)
       //Descending diagonal \ code
       if (list.includes(element + desDiagIncrement) && list.includes(element + 2 * desDiagIncrement) && +
         list.includes(element + 3 * desDiagIncrement) && list.includes(element + 4 * desDiagIncrement) && +
         ((element + 4 * desDiagIncrement) % columns !== 0) && ((element + 3 * desDiagIncrement) % columns !== 0) && +
         ((element + 2 * desDiagIncrement) % columns !== 0) && ((element + 1 * desDiagIncrement) % columns !== 0)) {
-        console.log("HELLO)")
         setWin(true)
       }
 
@@ -68,14 +60,12 @@ export default function Game() {
         list.includes(element - 3 * ascDiagIncrement) && list.includes(element - 4 * ascDiagIncrement) && +
         ((element - 4 * ascDiagIncrement) % columns !== 0) && ((element - 3 * ascDiagIncrement) % columns !== 0) && +
         ((element - 2 * ascDiagIncrement) % columns !== 0) && ((element - 1 * ascDiagIncrement) % columns !== 0)) {
-        console.log("HELLO1)")
         setWin(true)
       }
 
       //Vertical | code
       if (list.includes(element + verticalIncrement) && list.includes(element + 2 * verticalIncrement) && +
         list.includes(element + 3 * verticalIncrement) && list.includes(element + 4 * verticalIncrement)) {
-        console.log("HELLO2)")
         setWin(true)
       }
 
@@ -84,20 +74,9 @@ export default function Game() {
         list.includes(element + 3 * horizontalIncrement) && list.includes(element + 4 * horizontalIncrement) && +
         ((element + 4 * horizontalIncrement) % columns !== 0) && ((element + 3 * horizontalIncrement) % columns !== 0) && +
         ((element + 2 * horizontalIncrement) % columns !== 0) && ((element + 1 * horizontalIncrement) % columns !== 0)) {
-        console.log("HELLO3)")
-
         setWin(true)
-        console.log("Win?:", win)
       }
     })
-
-    if (p1Turn === false && win === true)//(playerTurn === PLAYERTURN.PLAYER1 && win === true)
-      console.log("Player 1 wins!!!!!!!")
-    //gameMessage.element.innerText = "Player 1 Wins!!!!!!!"
-    else if (playerTurn === PLAYERTURN.PLAYER2 && win === true)
-      console.log("Player 2 wins!!!!!!!")
-
-
   }
 
   const checkWinDraw = () => {
@@ -106,7 +85,6 @@ export default function Game() {
       console.log("checkForFive P1list:", p1List)
       checkForFive(p1List)
       setP1Turn(false)
-      winner()
     }
     else if (p1Turn === false && win === false) {
       console.log("checkForFive P2list:", p2List)
@@ -115,21 +93,23 @@ export default function Game() {
     }
 
     if (win === false && ((p1List.length + p2List.length) === (rows * columns))) {
-      console.log("did i get here")
       setDraw(true)
-
-      if (draw === true)
-        console.log("Game is a draw")
-      //gameMessage.element.innerText = "Game is a draw, click reset game"
     }
   }
 
-  const winner = () => {
-    if (win === true)
-      console.log("Got to win log")
-
-    return win
+  const resetBoard = () => {
+    saveCurrentUser(user)
+    setP1List([])
+    setP2List([])
+    setAllPositionList([])
+    setWin(false)
+    setDraw(false)
+    setP1Turn(true)
+    window.location.reload()
+    console.log(currentUser)
+    setState(user)
   }
+
 
   const gameStateMessage = () => {
     if (p1Turn === true && win === false && draw === false)
@@ -150,9 +130,7 @@ export default function Game() {
     <div>
       <div className={style.positions} style={{ gridTemplateColumns: `repeat(${boardSize}, 1fr)` }}>
         {[...Array(boardSize * boardSize)].map((_, index) => (
-          <Position key={`position-${index}`} id={index} onSelect={() => { currentPlayer(); checkWinDraw(); winner() }} player={playerTurn} p1List={p1List} p2List={p2List} win={win} />
-
-
+          <Position key={`position-${index}`} id={index} onSelect={() => { currentPlayer(); checkWinDraw() }} player={playerTurn} p1List={p1List} p2List={p2List} win={win} allPositionList={allPositionList} />
         ))}
 
       </div>
@@ -161,8 +139,8 @@ export default function Game() {
       </div>
 
       <div className={style.btncontainer}>
-        <Button onClick={() => window.location.reload()} >Reset</Button>
         <Button onClick={() => navigate('/')}>Leave</Button>
+        <Button onClick={resetBoard} >Reset </Button>
       </div >
     </div>
   )

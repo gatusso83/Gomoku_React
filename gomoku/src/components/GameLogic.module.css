@@ -1,8 +1,0 @@
-.overlay {
-    width: auto;
-    background-color: rgb(184, 163, 124);
-    max-width: 1000px;
-    flex-direction: column;
-    margin: 100px auto;
-    display: flex;
-}

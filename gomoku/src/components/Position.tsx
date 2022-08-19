@@ -1,5 +1,4 @@
-import { useState, useContext } from 'react'
-import { GameSizeContext } from '../context'
+import { useState } from 'react'
 import { STATUS, PLAYERTURN } from '../constants/index' //PLAYERTURN } from '../constants/index'
 import style from './Position.module.css'
 
@@ -10,19 +9,13 @@ type PositionProps = {
     player: PLAYERTURN
     p1List: Array<number>
     p2List: Array<number>
+    allPositionList: Array<number>
     win: boolean
 }
 
 export default function Position(props: PositionProps) {
-    const { id, onSelect, player, p1List, p2List, win } = props
-    //const { id, onSelect, player } = props
-    const [p1Turn, setP1Turn] = useState(true)
+    const { id, onSelect, player, p1List, p2List, win, allPositionList } = props
     const [status, setStatus] = useState(STATUS.AVAILABLE)
-    //const [win, setWin] = useState(false)
-    const [draw, setDraw] = useState(false)
-    const { boardSize } = useContext(GameSizeContext)
-    const columns = boardSize
-    const rows = boardSize
 
     const getClassNames = () => {
         const className = style.position
@@ -42,23 +35,23 @@ export default function Position(props: PositionProps) {
         if (status === STATUS.AVAILABLE && player === PLAYERTURN.PLAYER1 && win === false) {
             setStatus(STATUS.OCCUPIEDP1)
             p1List.push(id)
+            allPositionList.push(id)
             onSelect()
-
-            //setP1Turn(false)
-            return player
+            //return player
         }
         if (status === STATUS.AVAILABLE && player === PLAYERTURN.PLAYER2 && win === false) {
             console.log('select position', id)
             setStatus(STATUS.OCCUPIEDP2)
             p2List.push(id)
+            allPositionList.push(id)
             onSelect()
 
             //setP1Turn(true)
-            return player
+            //return player
         }
         if (win === true) {
             onSelect()
-            return player
+            //return player
         }
 
         if (status === STATUS.OCCUPIEDP1 || status === STATUS.OCCUPIEDP2)
