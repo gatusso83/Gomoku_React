@@ -5,7 +5,7 @@ import type { Game } from "../types/Game"
 import { get } from '../utils/http'
 import GameItem from '../components/GameItem'
 
-import style from './Game.module.css'
+import style from './Games.module.css'
 
 export default function Games() {
     const [games, setGames] = useState<Game[]>([])
@@ -24,14 +24,11 @@ export default function Games() {
 
     return (
         <div className={style.container}>
-            <>
-                {games.length === 0 && <p>Fetching Games...</p>}
-                {games.map(({ name, date, result }) => {
-                    console.log({ name }, { date }, { result });
-                    <GameItem name={name} date={date} result={result} />
-                })}
-
-            </>
+            {games.length === 0 && <p>Fetching Games...</p>}
+            {games.map(({ _id, name, date, result }) => (
+                //console.log({ _id }, { name }, { date }, { result })
+                <GameItem _id={_id} name={name} date={date} result={result} />
+            ))}
         </div>
     )
 }

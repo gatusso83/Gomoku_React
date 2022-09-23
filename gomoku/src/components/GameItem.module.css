@@ -17,6 +17,18 @@
     font-weight: 800;
 }
 
+.gametext {
+    font-size: 1rem;
+    padding: 1rem;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: White;
+    color: #000;
+    font-weight: lighter;
+    text-transform: uppercase;
+    text-align: center;
+}
+
 .button {
     cursor: pointer;
     color: white;

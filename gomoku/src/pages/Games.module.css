@@ -1,0 +1,41 @@
+.container {
+    width: 1200px;
+    height: 200px;
+    max-width: 1000px;
+    flex-direction: column;
+    margin: auto;
+    display: flex;
+}
+
+.positions {
+    display: grid;
+    gap: 0.5rem;
+    column-gap: 0.5rem;
+    background-color: rgb(241, 204, 134)
+}
+
+.position-map {
+
+    margin-top: 25px;
+    margin-left: 5%;
+    margin-right: 5%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: .5rem;
+    display: flex;
+    background-color: rgb(241, 204, 134);
+}
+
+.row {
+    display: flex;
+    column-gap: .2rem;
+}
+
+.btncontainer {
+    display: flex;
+    justify-content: center;
+    column-gap: 3rem;
+    width: 100%;
+    max-width: 1500px;
+}
