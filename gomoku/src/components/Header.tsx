@@ -12,14 +12,19 @@ export default function Header() {
         if (user) {
             return (
                 <>
-                    <button className={style.action} onClick={() => navigate('login')}>Login</button>
+
                     <button className={style.action} onClick={() => navigate('games')}>Previous Games</button>
+                    <button className={style.action} onClick={() => navigate('login')}>Login</button>
+                    <button className={style.action} onClick={() => navigate('sign-up')}>Sign Up</button>
                 </>
             )
         }
         else {
             return (
-                <button className={style.action} onClick={() => navigate('login')}>Login</button>
+                <>
+                    <button className={style.action} onClick={() => navigate('login')}>Login</button>
+                    <button className={style.action} onClick={() => navigate('sign-up')}>Sign Up</button>
+                </>
             )
         }
     }

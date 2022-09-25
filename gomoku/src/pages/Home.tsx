@@ -15,6 +15,7 @@ export default function Home() {
             return (
                 <>
                     <button className={style.action} onClick={() => navigate('game')}>Start Game</button>
+
                 </>
             )
         }

@@ -1,0 +1,39 @@
+.container {
+    width: 1200px;
+    height: 200px;
+    max-width: 1000px;
+    flex-direction: column;
+    margin: auto;
+    display: flex;
+}
+
+.header {
+    width: 100%;
+    padding: 1rem;
+    border-bottom: 2px solid #000;
+}
+
+.list {
+    width: 100%;
+    display: flex;
+    font-size: 1.2rem;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.title {
+    flex: 1;
+    font-weight: 800;
+}
+
+.gametext {
+    font-size: 1rem;
+    padding: 1rem;
+    padding-left: 10%;
+    padding-right: 10%;
+    background-color: White;
+    color: #000;
+    font-weight: lighter;
+    text-transform: uppercase;
+    text-align: center;
+}
